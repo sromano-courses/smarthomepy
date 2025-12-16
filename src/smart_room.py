@@ -1,4 +1,4 @@
-DEPLOYMENT = False  # This variable is to understand whether you are deploying on the actual hardware
+DEPLOYMENT = False
 
 import time
 
