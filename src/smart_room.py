@@ -15,7 +15,7 @@ except:
 
 
 class SmartRoom:
-    SERVO_PIN = 31 # Servo motor pin
+    SERVO_PIN = 31 # Servo motor
     INFRARED_PIN = 22 # infrared distance sensor pin
     LED_PIN = 37 # led pin
     PHOTO_PIN = 13 # photoresistor pin
@@ -47,24 +47,34 @@ class SmartRoom:
         self.fan_on = False
 
     def check_room_occupancy(self) -> bool:
-        # To be implemented
-        pass
+        from smarthome_actions import check_room_occupancy as _check
+        return _check(GPIO, self.INFRARED_PIN)
 
     def check_enough_light(self) -> bool:
-        # To be implemented
-        pass
+
+        from smarthome_actions import check_enough_light as _check
+        return _check(GPIO, self.PHOTO_PIN)
 
     def manage_light_level(self) -> None:
-        # To be implemented
-        pass
+
+        from smarthome_actions import manage_light_level as _manage
+        self.light_on = _manage(GPIO, self.LED_PIN, self.check_room_occupancy(), self.check_enough_light())
 
     def manage_window(self) -> None:
-        # To be implemented
-        pass
+
+        from smarthome_actions import manage_window as _manage
+        self.window_open = _manage(
+            self.change_servo_angle,
+            self.check_room_occupancy(),
+            float(self.bmp280_indor.temperature),
+            float(self.bmp280_outdoor.temperature),
+            self.window_open
+        )
 
     def monitor_air_quality(self) -> None:
-        # To be implemented
-        pass
+
+        from smarthome_actions import monitor_air_quality as _monitor
+        self.fan_on = _monitor(GPIO, self.FAN_PIN, self.sensair_s8, self.fan_on)
 
 
     def change_servo_angle(self, duty_cycle):
