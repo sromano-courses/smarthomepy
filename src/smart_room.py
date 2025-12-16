@@ -15,7 +15,7 @@ except:
 
 
 class SmartRoom:
-    SERVO_PIN = 31 # Servo motor pin
+    SERVO_PIN = 31 # Servo motor
     INFRARED_PIN = 22 # infrared distance sensor pin
     LED_PIN = 37 # led pin
     PHOTO_PIN = 13 # photoresistor pin

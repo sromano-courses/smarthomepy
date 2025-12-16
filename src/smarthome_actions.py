@@ -1,4 +1,4 @@
-# src/smarthome_actions.py
+
 
 # --- Config / thresholds (adjust ONLY if tests require different values) ---
 PHOTO_BRIGHT_VALUE = 1       # common digital photo module: 1=bright, 0=dark
